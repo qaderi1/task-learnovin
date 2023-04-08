@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// Route::get('/users/{userId}/token', 'UserController@generateToken');
+
+Route::get('/users/{userId}/token', [UserController::class, 'generateToken']);
+
+
+Route::post('/users/by-token/{token}', [UserController::class, 'getUser']);
